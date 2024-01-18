@@ -2,13 +2,14 @@ import {extendTheme} from '@chakra-ui/react';
 
 const fontSizes = {
   heading: {
-    1: '28px',
-    2: '24px',
-    3: '20px',
+    1: '24px',
+    2: '20px',
+    3: '18px',
+    "xl": "40px",
   },
   text: {
-    base: '16px',
-    small: '14px',
+    "base": '16px',
+    "small": '14px',
   },
 };
 
@@ -23,6 +24,15 @@ const fontWeights = {
     alternative: 500,
   },
 };
+
+const fonts = {
+  roboto: "Roboto, sans-serif",
+  inter: "'Inter', sans-serif",
+  heading: `Roboto, sans-serif`,
+  body: `Roboto, sans-serif`,
+}
+
+
 
 const theme = extendTheme({
   config: {initialColorMode: 'light', useSystemColorMode: false},
@@ -46,17 +56,73 @@ const theme = extendTheme({
     'border-danger': '#E32C1E',
   },
   components: {
-    Button: {
+    Checkbox: {
       baseStyle: () => ({
-        bg: 'unset',
-        backgroundColor: '#0F62FE',
-        color: '#FFFFFF',
-        borderRadius: '100px',
+        icon: {
+          color: "white",
+          size: "20px",
+        },
+        control: {
+          padding: 3,
+          bg: "white",
+          borderColor: "border-gray",
+          rounded: "full",
+          transitionProperty: 'all',
+          transitionDuration: 'normal',
+          _focus: {
+            boxShadow: "0 0 0 3px rgba(66, 153, 225, 0.6)",
+            borderColor: "fill-brand",
+          },
+          _hover: {
+            borderColor: "fill-brand",
+            boxShadow: "0 0 0 3px rgba(66, 153, 225, 0.6)",
+          },
+          _checked: {
+            bg: "fill-brand",
+          },
+        },
       }),
+    },
+    Menu: {
+      button: {
+        bg: 'fill-gray-hover',
+        color: 'text-primary',
+        _hover: {
+          bg: 'fill-gray',
+        },
+      }
+    },
+    Button: {
+      baseStyle: {
+        borderRadius: '100px',
+      },
+      variants: {
+        outline: {
+          border: "none",
+          color: 'text-primary',
+          bg: 'fill-gray',
+          _hover: {
+            bg: 'transparent',
+          },
+        },
+        ghost: {
+          bg: 'fill-gray-hover',
+          color: 'text-primary',
+          _hover: {
+            bg: 'fill-gray',
+          },
+        },
+        solid: {
+          bg: 'fill-brand',
+          backgroundColor: 'fill-brand',
+          color: '#FFFFFF',   
+        },
+      },
     },
   },
   fontSizes,
   fontWeights,
+  fonts,
 });
 
 export default theme;

@@ -1,3 +1,8 @@
+# TO DO
+
+- Aliases
+- SVG imports
+
 # Quick Overview
 
 - This repository is built on [Create React App](https://github.com/facebook/create-react-app) with TypeScript configuration
