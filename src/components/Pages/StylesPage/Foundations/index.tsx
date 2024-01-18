@@ -1,6 +1,6 @@
 import {Badge, Box, Divider, Flex, Heading} from '@chakra-ui/react';
 
-import {BrandText, TEXT_TYPE} from './../../../shared/Text';
+import {BrandText, TEXT_TYPE} from '../../../shared/BrandText';
 
 const Foundations = () => (
   <Box display="flex" flexDirection="column">

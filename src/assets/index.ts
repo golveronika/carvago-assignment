@@ -5,6 +5,7 @@ import iAddWhite from './icons/icon-add-white.svg';
 import iBackwards from './icons/icon-backwards.svg';
 import iCheck from './icons/icon-check.svg';
 import iDelete from './icons/icon-delete.svg';
+import iDeleteRed from './icons/icon-delete-red.svg';
 import iEdit from './icons/icon-edit.svg';
 import iForward from './icons/icon-forward.svg';
 import iMore from './icons/icon-more.svg';
@@ -20,6 +21,7 @@ export {
     iBackwards,
     iCheck,
     iDelete,
+    iDeleteRed,
     iEdit,
     iForward,
     iMore,

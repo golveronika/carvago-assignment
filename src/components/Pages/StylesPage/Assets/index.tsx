@@ -1,5 +1,5 @@
 import {Badge, Box, Divider, Flex, Heading, Image} from '@chakra-ui/react';
-import {BrandText, TEXT_TYPE} from '../../../shared/Text';
+import {BrandText, TEXT_TYPE} from '../../../shared/BrandText';
 
 import {
   Logo,

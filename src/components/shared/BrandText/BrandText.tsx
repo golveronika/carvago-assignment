@@ -1,7 +1,7 @@
 import React from 'react';
 import {ChakraProps, Heading, Text} from '@chakra-ui/react';
 
-interface TextProps extends ChakraProps {
+interface BrandTextProps extends ChakraProps {
   type?: TEXT_TYPE;
   children?: React.ReactNode;
 }
@@ -15,7 +15,7 @@ export enum TEXT_TYPE {
   SMALL_ALT,
 }
 
-const CustomText: React.FC<TextProps> = ({type = TEXT_TYPE.BASE, children, ...props}) => {
+const BrandText: React.FC<BrandTextProps> = ({type = TEXT_TYPE.BASE, children, ...props}) => {
   let customProps = {
     fontSize: 'base',
     fontWeight: 'text.base',
@@ -92,4 +92,4 @@ const CustomText: React.FC<TextProps> = ({type = TEXT_TYPE.BASE, children, ...pr
   );
 };
 
-export default CustomText;
+export default BrandText;

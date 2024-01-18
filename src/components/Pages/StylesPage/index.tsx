@@ -6,9 +6,9 @@ import Components from './Components';
 
 const StylesPage = () => (
   <Box display="flex" flexDirection="column">
-    <Components />
     <Foundations />
     <Assets />
+    <Components />
   </Box>
 );
 

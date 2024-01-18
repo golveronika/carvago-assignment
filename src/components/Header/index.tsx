@@ -1,9 +1,9 @@
 import {Box, Image, Flex, Avatar} from '@chakra-ui/react';
 import {LogoFull} from '../../assets';
-import {BrandText, TEXT_TYPE} from '../shared/Text';
+import {BrandText, TEXT_TYPE} from '../shared/BrandText';
 
 const Header = () => (
-  <Flex p={6} w={'100%'} justifyContent={'space-between'} alignItems={'center'}>
+  <Flex p={6} w={'100%'} justifyContent={'space-between'} alignItems={'center'} maxWidth={{base: '100%', lg: '1800px'}}>
     <Image
       display={'block'}
       mb={4}

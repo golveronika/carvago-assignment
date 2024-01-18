@@ -58,6 +58,10 @@ const theme = extendTheme({
   components: {
     Checkbox: {
       baseStyle: () => ({
+        icon: {
+          color: "white",
+          size: "20px",
+        },
         control: {
           padding: 3,
           bg: "white",
@@ -79,6 +83,15 @@ const theme = extendTheme({
         },
       }),
     },
+    Menu: {
+      button: {
+        bg: 'fill-gray-hover',
+        color: 'text-primary',
+        _hover: {
+          bg: 'fill-gray',
+        },
+      }
+    },
     Button: {
       baseStyle: {
         borderRadius: '100px',
@@ -86,6 +99,7 @@ const theme = extendTheme({
       variants: {
         outline: {
           border: "none",
+          color: 'text-primary',
           bg: 'fill-gray',
           _hover: {
             bg: 'transparent',
@@ -93,6 +107,7 @@ const theme = extendTheme({
         },
         ghost: {
           bg: 'fill-gray-hover',
+          color: 'text-primary',
           _hover: {
             bg: 'fill-gray',
           },
