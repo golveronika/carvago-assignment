@@ -17,5 +17,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
+  "exclude": ["src/assets"],
   "files": ["./@types/svg.d.ts"]
 }

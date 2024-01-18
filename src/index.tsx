@@ -1,6 +1,6 @@
 import {ChakraProvider} from '@chakra-ui/react';
 import {StrictMode} from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import {HelmetProvider} from 'react-helmet-async';
 import App from './App';
 import GlobalStyles from './GlobalStyles';
@@ -10,15 +10,18 @@ import theme from './theme';
 
 const MOUNT_NODE = document.getElementById('root');
 
-ReactDOM.render(
-  <StrictMode>
-    <ChakraProvider theme={theme} resetCSS>
-      <HelmetProvider>
-        <App />
-        <GlobalStyles />
-        <WebVitals showStatusInConsoleLog />
-      </HelmetProvider>
-    </ChakraProvider>
-  </StrictMode>,
-  MOUNT_NODE
-);
+if (MOUNT_NODE) {
+  const root = createRoot(MOUNT_NODE);
+
+  root.render(
+    <StrictMode>
+      <ChakraProvider theme={theme} resetCSS>
+        <HelmetProvider>
+          <App />
+          <GlobalStyles />
+          <WebVitals showStatusInConsoleLog />
+        </HelmetProvider>
+      </ChakraProvider>
+    </StrictMode>
+  );
+}
