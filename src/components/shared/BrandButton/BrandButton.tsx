@@ -8,6 +8,7 @@ interface BrandButtonProps extends ChakraProps {
   icon?: ICON;
   iconPosition?: ICON_POSITOION;
   variant?: BUTTON_VARIANT;
+  isSubmit?: boolean;
 }
 
 export enum ICON {
@@ -31,6 +32,7 @@ const BrandButton: React.FC<BrandButtonProps & PropsWithChildren> = ({
   icon = '',
   iconPosition = ICON_POSITOION.right,
   variant = BUTTON_VARIANT.solid,
+  isSubmit,
   ...props
 }) => {
   let Icon = <></>;
@@ -55,6 +57,7 @@ const BrandButton: React.FC<BrandButtonProps & PropsWithChildren> = ({
           leftIcon={icon && iconPosition === ICON_POSITOION.left ? Icon : <></>}
           rightIcon={icon && iconPosition === ICON_POSITOION.right ? Icon : <></>}
           variant={variant}
+          type={isSubmit ? 'submit' : 'button'}
           {...props}
         >
           {children}
@@ -66,6 +69,7 @@ const BrandButton: React.FC<BrandButtonProps & PropsWithChildren> = ({
           w={'min-content'}
           icon={Icon}
           variant={variant}
+          type={isSubmit ? 'submit' : 'button'}
           {...props}
         />
       )}

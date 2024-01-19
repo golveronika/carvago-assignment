@@ -23,6 +23,7 @@ interface BrandInputProps extends ChakraProps {
   maxWidth?: string;
   width?: string;
   type?: INPUT_TYPE;
+  register?: any;
 }
 
 export enum INPUT_TYPE {
@@ -40,10 +41,11 @@ const BrandInput: React.FC<BrandInputProps> = ({
   maxWidth = '100%',
   width = '100%',
   type = INPUT_TYPE.base,
+  register,
   ...props
 }) => {
   const [show, setShow] = useState(false);
-
+  
   return (
     <>
       <FormControl isRequired={isRequired} {...props}>
@@ -76,6 +78,7 @@ const BrandInput: React.FC<BrandInputProps> = ({
               placeholder={placeholder}
               isInvalid={isInvalid}
               type={show ? 'text' : 'password'}
+              {...register}
             />
             <InputRightElement width="40px">
               <IconButton
@@ -107,6 +110,7 @@ const BrandInput: React.FC<BrandInputProps> = ({
             focusBorderColor="border-brand"
             placeholder={placeholder}
             isInvalid={isInvalid}
+            {...register}
           />
         )}
 
@@ -122,6 +126,7 @@ const BrandInput: React.FC<BrandInputProps> = ({
             focusBorderColor="border-brand"
             placeholder={placeholder}
             isInvalid={isInvalid}
+            {...register}
           />
         )}
 
