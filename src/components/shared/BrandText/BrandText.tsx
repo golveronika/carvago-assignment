@@ -83,6 +83,7 @@ const BrandText: React.FC<BrandTextProps> = ({type = TEXT_TYPE.BASE, children, .
           fontSize={customProps.fontSize}
           fontWeight={customProps.fontWeight}
           fontFamily={customProps.fontFamily}
+          lineHeight={"24px"}
           {...props}
         >
           {children}
