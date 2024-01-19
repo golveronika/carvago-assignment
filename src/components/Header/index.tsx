@@ -14,19 +14,12 @@ const Header = () => {
       alignItems={'center'}
       maxWidth={{base: '100%', lg: '1800px'}}
     >
-      <Image
-        display={'block'}
-        mb={4}
-        maxW={'130px'}
-        objectFit="cover"
-        src={LogoFull}
-        alt="Logo Full"
-      />
+      <Image display={'block'} maxW={'130px'} objectFit="cover" src={LogoFull} alt="Logo Full" />
 
       {state.user && (
         <Box display="flex" alignItems={'center'}>
-          <Avatar name="Dan Abrahmov" src={state.user?.image} />
-          <BrandText type={TEXT_TYPE.BASE} ml={4}>
+          <Avatar name="Dan Abrahmov" size={'md'} src={state.user?.image} />
+          <BrandText type={TEXT_TYPE.BASE} ml={4} display={{base: 'none', sm: 'block'}}>
             {`${state.user?.firstName} ${state.user?.lastName}`}
           </BrandText>
         </Box>

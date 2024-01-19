@@ -8,6 +8,17 @@ import WebVitals from './WebVitals';
 import './i18n/i18n';
 import theme from './theme';
 
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {AppContextProvider} from './context';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 const MOUNT_NODE = document.getElementById('root');
 
 if (MOUNT_NODE) {
@@ -16,11 +27,15 @@ if (MOUNT_NODE) {
   root.render(
     <StrictMode>
       <ChakraProvider theme={theme} resetCSS>
-        <HelmetProvider>
-          <App />
-          <GlobalStyles />
-          <WebVitals showStatusInConsoleLog />
-        </HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <AppContextProvider>
+            <HelmetProvider>
+              <App />
+              <GlobalStyles />
+              <WebVitals showStatusInConsoleLog />
+            </HelmetProvider>
+          </AppContextProvider>
+        </QueryClientProvider>
       </ChakraProvider>
     </StrictMode>
   );

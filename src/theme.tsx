@@ -56,6 +56,17 @@ const theme = extendTheme({
     'border-danger': '#E32C1E',
   },
   components: {
+    Avatar: {
+      sizes: {
+        md: {
+        container: {
+          
+            width: "38px",
+            height: "38px",
+          },
+        },
+      }
+    },
     Checkbox: {
       baseStyle: () => ({
         icon: {

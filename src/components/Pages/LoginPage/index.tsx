@@ -46,8 +46,6 @@ const LoginPage = () => {
     }
   };
 
-  if (!state.isAppLoaded) return null;
-
   return (
     <Box display="flex" flexDirection="column">
       <Card p={'40px'} borderRadius={'15px'} maxW={'560px'}>
