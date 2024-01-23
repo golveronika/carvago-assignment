@@ -19,8 +19,13 @@ export interface ITodo {
   completed: boolean;
   id: number;
   todo: string;
-  description: string;
+  description?: string;
   userId: number;
+}
+
+export interface INewTodo {
+  todo: string;
+  description?: string;
 }
 
 export interface ITodos {

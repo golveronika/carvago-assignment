@@ -1,34 +1,39 @@
+import {useEffect, useState} from 'react';
 import {Box, Card, Divider, Flex, Fade} from '@chakra-ui/react';
 
-import {BrandText, TEXT_TYPE} from '../../shared/BrandText';
 import {useTranslation} from 'react-i18next';
 import {format} from 'date-fns';
 
 import {useAppContext} from '../../../context';
+import {BrandText, TEXT_TYPE} from '../../shared/BrandText';
 import {BrandButton, ICON} from '../../shared/BrandButton';
-
-import EmptyState from './partials/EmptyState';
 
 import useUserTodos from '../../../api/query/useUserTodos';
 import useUserTodosUpdate from '../../../api/query/useUserTodosUpdate';
 import useUserTodosDelete from '../../../api/query/useUserTodosDelete';
+import useUserTodosCreate from '../../../api/query/useUserTodosCreate';
 
-import {useEffect, useState} from 'react';
-import {ITodo, TTodos} from '../../../../@types/api';
+import {INewTodo, ITodo, TTodos} from '../../../../@types/api';
 
+import EmptyState from './partials/EmptyState';
 import TodoItem from './partials/TodoItem';
+import TaskForm from './partials/TaskForm';
 
 const HomePage = () => {
   const {t} = useTranslation();
 
-  const {actions, state} = useAppContext();
+  const {state} = useAppContext();
 
   const {data, isLoading} = useUserTodos(state.user?.id);
 
   const [userTodos, setUserTodos] = useState<TTodos>([]);
+  const [isTaskFormShow, setIsTaskFormShow] = useState<boolean>(false);
+
+  const [editedTask, setEditedTask] = useState<ITodo | null>(null);
 
   const {mutate: updateTodo} = useUserTodosUpdate();
   const {mutate: deleteTodo} = useUserTodosDelete();
+  const {mutate: createTodo} = useUserTodosCreate();
 
   useEffect(() => {
     if (!isLoading) {
@@ -39,11 +44,11 @@ const HomePage = () => {
   const completedTodos = userTodos?.filter((todo) => todo.completed);
   const newTodos = userTodos?.filter((todo) => !todo.completed);
 
-  const onTodoChanged = async (todo: ITodo, value: boolean) => {
-    await updateTodo(
+  const onTodoChanged = (todo: ITodo, value: boolean | undefined = undefined) => {
+    updateTodo(
       {
         todos: userTodos,
-        todo: {...todo, completed: value},
+        todo: {...todo, completed: value !== undefined ? value : todo.completed},
       },
       {
         onSuccess: (result) => {
@@ -53,8 +58,8 @@ const HomePage = () => {
     );
   };
 
-  const onTodoDelete = async (todoId: number) => {
-    await deleteTodo(
+  const onTodoDelete = (todoId: number) => {
+    deleteTodo(
       {
         todos: userTodos,
         todoId,
@@ -66,6 +71,39 @@ const HomePage = () => {
       }
     );
   };
+
+  const onCreateTodo = (todo: INewTodo) => {
+    createTodo(
+      {
+        todos: userTodos,
+        todo,
+        userId: state.user?.id as number,
+      },
+      {
+        onSuccess: (result) => {
+          setUserTodos(result);
+        },
+      }
+    );
+  };
+
+  if (isTaskFormShow)
+    return (
+      <Box display="flex" flexDirection="column" w={'100%'} alignItems={'center'}>
+        <Card p={'40px'} borderRadius={'15px'} w={'100%'} maxW={'1280px'}>
+          <TaskForm
+            onCreate={onCreateTodo}
+            onUpdate={onTodoChanged}
+            isNewTask={!!!editedTask}
+            editedTask={editedTask}
+            onCancel={() => {
+              setEditedTask(null);
+              setIsTaskFormShow(!isTaskFormShow);
+            }}
+          />
+        </Card>
+      </Box>
+    );
 
   return (
     <Fade in={!isLoading} style={{width: '100%'}}>
@@ -81,7 +119,11 @@ const HomePage = () => {
               </BrandText>
             </Flex>
 
-            <BrandButton isSubmit={true} icon={ICON.addWhite}>
+            <BrandButton
+              isSubmit={true}
+              icon={ICON.addWhite}
+              onClick={() => setIsTaskFormShow(!isTaskFormShow)}
+            >
               {t('task.add')}
             </BrandButton>
           </Flex>
@@ -95,9 +137,13 @@ const HomePage = () => {
               {newTodos?.map((todo) => (
                 <TodoItem
                   todo={todo}
-                  key={todo.id}
+                  key={`newTodos-${todo.id}`}
                   onChange={onTodoChanged}
                   onDelete={onTodoDelete}
+                  onEdit={(todoToEdit) => {
+                    setEditedTask(todoToEdit);
+                    setIsTaskFormShow(!isTaskFormShow);
+                  }}
                 />
               ))}
             </Flex>
@@ -114,9 +160,13 @@ const HomePage = () => {
               {completedTodos?.map((todo) => (
                 <TodoItem
                   todo={todo}
-                  key={todo.id}
+                  key={`completedTodos-${todo.id}`}
                   onChange={onTodoChanged}
                   onDelete={onTodoDelete}
+                  onEdit={(todoToEdit) => {
+                    setEditedTask(todoToEdit);
+                    setIsTaskFormShow(!isTaskFormShow);
+                  }}
                 />
               ))}
             </Flex>

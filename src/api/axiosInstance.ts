@@ -18,10 +18,14 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    clearLocalStorage();
-    Promise.reject(error)
-  }
+  (error) => Promise.reject(error)
+
 );
+
+axiosInstance.interceptors.response.use((response) => response, 
+(error) =>  {
+  clearLocalStorage();
+  return Promise.reject(error)
+});
 
 export default axiosInstance;

@@ -11,9 +11,10 @@ interface TodoItemProps {
   todo: ITodo;
   onChange: (todo: ITodo, completed: boolean) => void;
   onDelete: (todoId: number) => void;
+  onEdit: (todo: ITodo) => void;
 }
 
-const TodoItem: FC<TodoItemProps> = ({todo, onChange, onDelete}) => {
+const TodoItem: FC<TodoItemProps> = ({todo, onChange, onDelete, onEdit}) => {
   const {t} = useTranslation();
 
   return (
@@ -29,14 +30,14 @@ const TodoItem: FC<TodoItemProps> = ({todo, onChange, onDelete}) => {
         </Checkbox>
 
         {todo.description && (
-          <BrandText type={TEXT_TYPE.BASE} color={'text-tertiary'}>
+          <BrandText type={TEXT_TYPE.BASE} color={'text-tertiary'} mb={4} mt={-3}>
             {todo.description}
           </BrandText>
         )}
       </Flex>
 
       <BrandMenu>
-        <MenuItem>
+        <MenuItem onClick={() => onEdit(todo)}>
           <Image objectFit="cover" src={iEdit} alt="edit" />
           <BrandText type={TEXT_TYPE.SMALL} ml={2}>
             {t('task.edit')}

@@ -11,7 +11,6 @@ const useUserTodosUpdate = () => {
       queryClient.invalidateQueries({queryKey: ['useUserTodosUpdate']});
       return result;
     },
-    onError: (error) => error,
   });
 };
 export default useUserTodosUpdate;

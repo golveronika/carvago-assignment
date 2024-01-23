@@ -14,5 +14,12 @@
   "task.todo": "To-do",
   "task.completed": "Completed",
   "task.edit": "Edit",
-  "task.delete": "Delete"
+  "task.delete": "Delete",
+  "task.new": "New task",
+  "task.taskname": "Task name",
+  "task.description": "Description (Optional)",
+  "task.discard": "Discard",
+  "task.discardChanges": "Discard changes",
+  "task.create": "Create task",
+  "task.save": "Save changes"
 }

@@ -1,6 +1,14 @@
 import React, {PropsWithChildren} from 'react';
 import {ChakraProps, IconButton, Image, Button} from '@chakra-ui/react';
-import {iAddWhite, iAdd, iForwardWhite} from '../../../assets';
+import {
+  iAddWhite,
+  iAdd,
+  iForwardWhite,
+  iForward,
+  iBackwards,
+  iCheck,
+  iCheckWhite,
+} from '../../../assets';
 
 interface BrandButtonProps extends ChakraProps {
   children?: React.ReactNode;
@@ -9,12 +17,17 @@ interface BrandButtonProps extends ChakraProps {
   iconPosition?: ICON_POSITOION;
   variant?: BUTTON_VARIANT;
   isSubmit?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export enum ICON {
   add = 'add',
   addWhite = 'addWhite',
   forwardWhite = 'forwardWhite',
+  forward = 'forward',
+  backward = 'backward',
+  check = 'check',
+  checkWhite = 'checkWhite',
 }
 
 export enum ICON_POSITOION {
@@ -34,6 +47,7 @@ const BrandButton: React.FC<BrandButtonProps & PropsWithChildren> = ({
   iconPosition = ICON_POSITOION.right,
   variant = BUTTON_VARIANT.solid,
   isSubmit,
+  onClick,
   ...props
 }) => {
   let Icon = <></>;
@@ -46,6 +60,18 @@ const BrandButton: React.FC<BrandButtonProps & PropsWithChildren> = ({
       break;
     case ICON.forwardWhite:
       Icon = <Image bg={'transparent'} objectFit="cover" src={iForwardWhite} alt="forward" />;
+      break;
+    case ICON.forward:
+      Icon = <Image bg={'transparent'} objectFit="cover" src={iForward} alt="forward" />;
+      break;
+    case ICON.backward:
+      Icon = <Image bg={'transparent'} objectFit="cover" src={iBackwards} alt="backward" />;
+      break;
+    case ICON.check:
+      Icon = <Image bg={'transparent'} objectFit="cover" src={iCheck} alt="check" />;
+      break;
+    case ICON.checkWhite:
+      Icon = <Image bg={'transparent'} objectFit="cover" src={iCheckWhite} alt="check" />;
       break;
     default:
       break;
@@ -62,6 +88,7 @@ const BrandButton: React.FC<BrandButtonProps & PropsWithChildren> = ({
           rightIcon={icon && iconPosition === ICON_POSITOION.right ? Icon : <></>}
           variant={variant}
           type={isSubmit ? 'submit' : 'button'}
+          onClick={onClick}
           {...props}
         >
           {children}
@@ -74,6 +101,7 @@ const BrandButton: React.FC<BrandButtonProps & PropsWithChildren> = ({
           icon={Icon}
           variant={variant}
           type={isSubmit ? 'submit' : 'button'}
+          onClick={onClick}
           {...props}
         />
       )}
