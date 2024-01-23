@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import {ChakraProps, IconButton, Image, Button} from '@chakra-ui/react';
-import {iAddWhite, iAdd} from '../../../assets';
+import {iAddWhite, iAdd, iForwardWhite} from '../../../assets';
 
 interface BrandButtonProps extends ChakraProps {
   children?: React.ReactNode;
@@ -14,6 +14,7 @@ interface BrandButtonProps extends ChakraProps {
 export enum ICON {
   add = 'add',
   addWhite = 'addWhite',
+  forwardWhite = 'forwardWhite',
 }
 
 export enum ICON_POSITOION {
@@ -42,6 +43,9 @@ const BrandButton: React.FC<BrandButtonProps & PropsWithChildren> = ({
       break;
     case ICON.add:
       Icon = <Image bg={'transparent'} objectFit="cover" src={iAdd} alt="add" />;
+      break;
+    case ICON.forwardWhite:
+      Icon = <Image bg={'transparent'} objectFit="cover" src={iForwardWhite} alt="forward" />;
       break;
     default:
       break;

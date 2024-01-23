@@ -14,3 +14,20 @@ export interface IUser {
   id: number;
   token?: string;
 }
+
+export interface ITodo {
+  completed: boolean;
+  id: number;
+  todo: string;
+  description: string;
+  userId: number;
+}
+
+export interface ITodos {
+  limit: number;
+  skip: number;
+  total: number;
+  todos: ITodo[];
+}
+
+export type TTodos = ITodo[];

@@ -8,6 +8,7 @@ import iDelete from './icons/icon-delete.svg';
 import iDeleteRed from './icons/icon-delete-red.svg';
 import iEdit from './icons/icon-edit.svg';
 import iForward from './icons/icon-forward.svg';
+import iForwardWhite from './icons/icon-forward-white.svg';
 import iMore from './icons/icon-more.svg';
 import iShow from './icons/icon-show.svg';
 import iHide from './icons/icon-hide.svg';
@@ -24,6 +25,7 @@ export {
     iDeleteRed,
     iEdit,
     iForward,
+    iForwardWhite,
     iMore,
     iShow,
     iHide,

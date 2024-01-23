@@ -7,15 +7,15 @@ import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import {BrandInput, INPUT_TYPE} from '../../shared/BrandInput';
-import {BrandButton} from '../../shared/BrandButton';
+import {BrandButton, ICON} from '../../shared/BrandButton';
 import useLogin from '../../../api/query/useLogin';
 import {setToLocalStorage} from '../../../utils/localStorage';
 import {useNavigate} from 'react-router-dom';
 import {useAppContext} from '../../../context';
 
 const schema = z.object({
-  username: z.string().min(1),
-  password: z.string().min(1),
+  username: z.string().min(1, { message: "Username is required" }),
+  password: z.string().min(1, { message: "Password is required" }),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -27,8 +27,9 @@ const LoginPage = () => {
   const loginUser = useLogin();
   const navigate = useNavigate();
 
-  const {register, handleSubmit} = useForm<Schema>({
+  const {register, handleSubmit, setError, formState: { errors },} = useForm<Schema>({
     resolver: zodResolver(schema),
+    mode: "onSubmit",
   });
 
   useEffect(() => {
@@ -43,6 +44,11 @@ const LoginPage = () => {
       await setToLocalStorage('accessToken', result.token);
       actions.setUser(result);
       navigate(`/`);
+    } else {
+      setError("password", {
+        type: "manual",
+        message: "Wrong password or username",
+      })
     }
   };
 
@@ -62,6 +68,8 @@ const LoginPage = () => {
             labelText={t('login.username')}
             isRequired
             register={{...register('username')}}
+            isInvalid={!!errors.username}
+            helperText={errors.username?.message}
           />
           <BrandInput
             mb={10}
@@ -69,8 +77,10 @@ const LoginPage = () => {
             type={INPUT_TYPE.password}
             isRequired
             register={{...register('password')}}
+            isInvalid={!!errors.password}
+            helperText={errors.password?.message}
           />
-          <BrandButton w={'100%'} isSubmit={true}>
+          <BrandButton w={'100%'} isSubmit={true} icon={ICON.forwardWhite}>
             {t('login.login')}
           </BrandButton>
         </form>
