@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import {IUser} from '../@types/api';
 import useAuth from './api/query/useAuth';
+import {Flex, Spinner} from '@chakra-ui/react';
 
 interface AppState {
   actions: {
@@ -35,16 +36,18 @@ export const AppContextProvider: React.FC<PropsWithChildren> = ({children}) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
 
-  const {data, isLoading} = useAuth();
+  const {data, isLoading, isError} = useAuth();
 
   useEffect(() => {
     if (!isLoading && data) {
       setUser(data);
       setIsAppLoaded(true);
-    } else if (!isLoading && !data) {
+    } else if (!isLoading && !!!data) {
+      setIsAppLoaded(true);
+    } else if (isError) {
       setIsAppLoaded(true);
     }
-  }, [isLoading]);
+  }, [isLoading, data, isError]);
 
   const appContextValue = useMemo(
     () => ({
@@ -53,6 +56,13 @@ export const AppContextProvider: React.FC<PropsWithChildren> = ({children}) => {
     }),
     [user, setUser]
   );
+
+  if (!isAppLoaded)
+    return (
+      <Flex justifyContent="center" alignItems="center" height="100vh">
+        <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
+      </Flex>
+    );
 
   return <AppContext.Provider value={appContextValue}>{children}</AppContext.Provider>;
 };

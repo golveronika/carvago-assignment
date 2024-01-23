@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {BASE_URL} from '../constants/configs';
-import {getFromLocalStorage} from '../utils/localStorage';
+import {clearLocalStorage, getFromLocalStorage} from '../utils/localStorage';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -19,6 +19,13 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => Promise.reject(error)
+
 );
+
+axiosInstance.interceptors.response.use((response) => response, 
+(error) =>  {
+  clearLocalStorage();
+  return Promise.reject(error)
+});
 
 export default axiosInstance;

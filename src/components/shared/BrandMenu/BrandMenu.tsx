@@ -17,7 +17,13 @@ const BrandMenu: React.FC<BrandMenuProps & PropsWithChildren> = ({
     <Menu defaultIsOpen={defaultIsOpen} {...props}>
       {({isOpen}) => (
         <>
-          <MenuButton isActive={isOpen} as={Button} variant={'ghost'} width={'40px'}>
+          <MenuButton
+            isActive={isOpen}
+            as={Button}
+            variant={'ghost'}
+            width={'40px'}
+            bg={'transparent'}
+          >
             <Image
               bg={'transparent'}
               objectFit="cover"
@@ -27,7 +33,7 @@ const BrandMenu: React.FC<BrandMenuProps & PropsWithChildren> = ({
               height={'15px'}
             />
           </MenuButton>
-          <MenuList p={2} borderRadius={'15'}>
+          <MenuList p={2} borderRadius={'15'} boxShadow={'0px 0px 34px -15px rgba(0,0,0,0.5);'}>
             {children}
           </MenuList>
         </>

@@ -6,5 +6,20 @@
   "login.description": "Welcome to our secure portal! To access the full functionality of our app, kindly provide your credentials below. Your privacy is our priority.",
   "login.username": "Username",
   "login.password": "Password",
-  "login.login": "Log in"
+  "login.login": "Log in",
+  "home.hello": "Hello {{name}}!",
+  "task.add": "Add task",
+  "task.empty.title": "You are amazing!",
+  "task.empty.text": "There is no more task to do.",
+  "task.todo": "To-do",
+  "task.completed": "Completed",
+  "task.edit": "Edit",
+  "task.delete": "Delete",
+  "task.new": "New task",
+  "task.taskname": "Task name",
+  "task.description": "Description (Optional)",
+  "task.discard": "Discard",
+  "task.discardChanges": "Discard changes",
+  "task.create": "Create task",
+  "task.save": "Save changes"
 }
